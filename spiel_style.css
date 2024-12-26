@@ -1,0 +1,116 @@
+#ganze_flaeche {
+    display: block;
+    margin: auto;
+    width: 400px;
+    height: 600px;
+}
+
+
+#spieloberflaeche {
+    width: 100%;
+    height: 500px;
+    border: 2px solid #000;
+    position: relative;
+    background-color: #f4f4f4;
+    overflow: hidden; /* Verhindert Überlauf */
+}
+
+#spieloberflaeche:not(.einsatz-zone) {
+    background-image: linear-gradient(45deg, #d4f5d4 25%, transparent 25%, transparent 75%, #d4f5d4 75%, #d4f5d4),
+                      linear-gradient(45deg, #b8e6b8 25%, transparent 25%, transparent 75%, #b8e6b8 75%, #b8e6b8);
+    background-size: 40px 40px; /* Größe der Quadrate */
+    background-position: 0 0, 20px 20px; /* Versatz für das Schachbrettmuster */
+}
+
+.einsatz-zone {
+    position: absolute;
+    width: 100%;
+    height: 75px;
+    background-color: rgba(70, 70, 70, 0.342);
+    z-index: 1; /* Hebt die Einsatz-Zonen hervor */
+}
+
+#gold-anzeige {
+    position: absolute;
+    top: 10px; /* Abstand vom oberen Rand */
+    right: 10px; /* Abstand vom rechten Rand */
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+
+.turm {
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    position: absolute;
+    border-radius: 35%;
+    border-color: black;
+}
+
+.spieler-turm {
+    bottom: 10px;
+}
+
+.gegner-turm {
+    top: 10px;
+}
+
+.turm-mitte {
+    left: calc(50% - 17.5px);
+}
+
+.karte {
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+    background-color: #ccc;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+#karten-deck {
+    margin-top: 20px;
+}
+
+.einsatz-zone.oben {
+    top: 0;
+}
+
+.einsatz-zone.unten {
+    bottom: 0;
+}
+
+.einheit {
+    position: relative;
+    width: 40px;  /* Beispielgröße, anpassbar */
+    height: 40px; /* Beispielgröße, anpassbar */
+    border-radius: 50%; /* Macht die Einheit rund */
+    overflow: hidden; /* Verhindert, dass Inhalte außerhalb des Kreises sichtbar sind */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray; /* Hintergrundfarbe der Einheit */
+}
+
+.einheit-avatar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Zentriert das Bild */
+    width: 100%;  /* Bild nimmt die volle Breite der Einheit ein */
+    height: 100%; /* Bild nimmt die volle Höhe der Einheit ein */
+    object-fit: cover; /* Verhindert, dass das Bild verzerrt wird */
+}
+
+.hp-balken {
+    position: absolute;
+    top: -5px; /* Verschiebt den Balken knapp über den Kreis */
+    left: 0;
+    width: 100%;  /* Der HP-Balken nimmt die volle Breite des Containers ein */
+    height: 3px;  /* Höhe des Balkens */
+    background-color: green;  /* Standardfarbe des Balkens */
+    border-radius: 2px;  /* Abgerundete Ecken für den Balken */
+    z-index: 1; /* Stellt sicher, dass der Balken über dem Avatar angezeigt wird */
+}

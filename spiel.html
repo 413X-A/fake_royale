@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiel</title>
+    <link rel="stylesheet" href="spiel_style.css">
+</head>
+
+<body>
+    <div id="ganze_flaeche">
+        <div id="spiel-ueberschrift"></div>
+        <div id="spiel-counter">5m 0s</div>
+        <button id="spiel-index" onclick="zur_index()">Zur Index</button>
+
+        <div id="spieloberflaeche">
+            <div id="gold-anzeige">Gold: 0</div> <!-- Hier wird das Gold angezeigt -->
+            <!-- Einsatzbereiche -->
+            <div class="einsatz-zone oben" onclick="platziereEinheit(event)"></div>
+            <div class="einsatz-zone unten" onclick="platziereEinheit(event)"></div>
+
+            <!-- Gegnerische Türme -->
+            <div class="turm gegner-turm turm-mitte"></div>
+
+            <!-- Spielerische Türme -->
+            <div class="turm spieler-turm turm-mitte"></div>
+        </div>
+
+        <div id="karten-deck">
+            <div class="karte" onclick="waehleKarte('Frostläufer')">Frostläufer</div>
+            <div class="karte" onclick="waehleKarte('Samurai')">Samurai</div>
+            <div class="karte" onclick="waehleKarte('Ritter')">Ritter</div>
+            <div class="karte" onclick="waehleKarte('Skelett')">Skelett</div>
+            <div class="karte" onclick="waehleKarte('Wikinger')">Wikinger</div>
+            <div class="karte" onclick="waehleKarte('Nachtwächter')">Nachtwächter</div>
+            <div class="karte" onclick="waehleKarte('Drachen')">Drachen</div>
+        </div>
+    </div>
+    <script src="spiel.js"></script>
+    <!--  <script src="bot.js"></script> -->
+</body>
+
+</html>
