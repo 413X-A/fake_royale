@@ -407,19 +407,57 @@ function verursacheSchadenAnEinheit(einheit, schaden) {
     }
 }
 
-function angreifeTurm(seite, einheitTyp) {
-    const turm = document.querySelector(`.${seite}-turm`);
-    const aktuellesHP = parseInt(turm.dataset.hp, 10);
-    const schaden = getEinheitSchaden(einheitTyp);
+function angreifeTurm(seite, einheit, einheitTyp, angreiferSeite) {
+    // Die Seite gibt an, welcher Turm angegriffen wird ("spieler" oder "gegner").
+    // Die angreiferSeite gibt an, ob die Einheit vom Spieler oder vom Bot stammt.
 
-    const neuerHP = aktuellesHP - schaden;
-    if (neuerHP <= 0) {
-        turm.dataset.hp = 0;
-        turm.style.backgroundColor = 'red'; // Beispiel: Turm zerstört
+    // Nur gegnerische Einheiten dürfen Türme angreifen
+    if ((seite === "spieler" && angreiferSeite !== "bot") || (seite === "gegner" && angreiferSeite !== "spieler")) {
+        console.warn(`Einheit von der Seite "${angreiferSeite}" kann den "${seite}"-Turm nicht angreifen.`);
+        return;
+    }
+
+    const turm = document.querySelector(`.${seite}-turm`);
+    if (!turm) {
+        console.error(`Turm mit der Seite "${seite}" nicht gefunden!`);
+        return;
+    }
+
+    // Stelle sicher, dass der Turm ein HP-Wert hat
+    if (!turm.dataset.hp) {
+        turm.dataset.hp = "2500"; // Standard-HP für Türme
+    }
+
+    const turmHP = parseInt(turm.dataset.hp, 10);
+    const turmSchaden = 100; // Schaden, den der Turm der Einheit zufügt
+    const einheitSchaden = getEinheitSchaden(einheitTyp);
+
+    // Einheit erleidet Schaden vom Turm
+    const einheitHP = parseInt(einheit.dataset.hp || "100", 10); // Standard-HP der Einheit
+    const neuerEinheitHP = einheitHP - turmSchaden;
+
+    if (neuerEinheitHP <= 0) {
+        einheit.dataset.destroyed = "true"; // Einheit ist zerstört
+        einheit.remove(); // Entferne die Einheit aus dem Spielfeld
+        console.log("Einheit wurde zerstört!");
     } else {
-        turm.dataset.hp = neuerHP;
+        einheit.dataset.hp = neuerEinheitHP;
+        console.log(`Einheit HP: ${neuerEinheitHP}`);
+    }
+
+    // Turm erleidet Schaden von der Einheit
+    const neuerTurmHP = turmHP - einheitSchaden;
+
+    if (neuerTurmHP <= 0) {
+        turm.dataset.hp = 0;
+        turm.style.backgroundColor = 'red'; // Zeige an, dass der Turm zerstört ist
+        alert(`${seite === "gegner" ? "Dein Gegner" : "Du"} hat den Turm verloren!`);
+    } else {
+        turm.dataset.hp = neuerTurmHP;
+        turm.textContent = `HP: ${turm.dataset.hp}`; // Zeige aktuelle HP an
     }
 }
+
 
 function getEinheitSchaden(einheitTyp) {
     switch (einheitTyp) {
