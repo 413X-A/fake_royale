@@ -456,6 +456,7 @@ function angreifeTurm(seite, einheit, einheitTyp, angreiferSeite) {
         turm.dataset.hp = neuerTurmHP;
         turm.textContent = `HP: ${turm.dataset.hp}`; // Zeige aktuelle HP an
     }
+    aktualisiereHP()
 }
 
 
