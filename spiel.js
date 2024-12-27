@@ -418,15 +418,6 @@ function angreifeTurm(seite, einheit, einheitTyp, angreiferSeite) {
     }
 
     const turm = document.querySelector(`.${seite}-turm`);
-    if (!turm) {
-        console.error(`Turm mit der Seite "${seite}" nicht gefunden!`);
-        return;
-    }
-
-    // Stelle sicher, dass der Turm ein HP-Wert hat
-    if (!turm.dataset.hp) {
-        turm.dataset.hp = "2500"; // Standard-HP für Türme
-    }
 
     const turmHP = parseInt(turm.dataset.hp, 10);
     const turmSchaden = 100; // Schaden, den der Turm der Einheit zufügt
